@@ -15,7 +15,7 @@ type (
 	InstrumentType       string
 	MarginMode           string
 	ContractType         string
-	PositionType         string
+	PosModeType          string
 	PositionSide         string
 	ActualSide           string
 	TradeMode            string
@@ -142,8 +142,8 @@ const (
 	BillSystemTransferOutSubType                = BillSubType(202)
 	BillManuallyTransferOutSubType              = BillSubType(203)
 
-	PositionLongShortMode = PositionType("long_short_mode")
-	PositionNetMode       = PositionType("net_mode")
+	PositionLongShortMode = PosModeType("long_short_mode")
+	PositionNetMode       = PosModeType("net_mode")
 
 	PositionLongSide  = PositionSide("long")
 	PositionShortSide = PositionSide("short")
