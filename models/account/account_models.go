@@ -79,6 +79,7 @@ type (
 		InstType    okex.InstrumentType `json:"instType"`
 		CTime       okex.JSONTime       `json:"cTime"`
 		UTime       okex.JSONTime       `json:"uTime"`
+		RealizedPnl okex.JSONFloat64    `json:"realizedPnl"`
 	}
 	BalanceAndPosition struct {
 		EventType okex.EventType    `json:"eventType"`
