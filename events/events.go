@@ -2,7 +2,7 @@ package events
 
 import (
 	"encoding/json"
-	"github.com/amir-the-h/okex"
+	"github.com/djpken/okex"
 )
 
 type (
