@@ -1,4 +1,4 @@
-module github.com/djpken/okex
+module github.com/djpken/go-okex
 
 go 1.21
 
