@@ -1,8 +1,8 @@
 package ws
 
 import (
-	"github.com/djpken/okex"
-	requests "github.com/djpken/okex/requests/ws/trade"
+	"github.com/djpken/go-okex"
+	requests "github.com/djpken/go-okex/requests/ws/trade"
 )
 
 // Trade

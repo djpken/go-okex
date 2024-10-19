@@ -2,11 +2,12 @@ package rest
 
 import (
 	"encoding/json"
-	"github.com/djpken/okex"
-	requests "github.com/djpken/okex/requests/rest/subaccount"
-	responses "github.com/djpken/okex/responses/sub_account"
 	"net/http"
 	"strings"
+
+	"github.com/djpken/go-okex"
+	requests "github.com/djpken/go-okex/requests/rest/subaccount"
+	responses "github.com/djpken/go-okex/responses/sub_account"
 )
 
 // SubAccount

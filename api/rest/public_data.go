@@ -2,10 +2,11 @@ package rest
 
 import (
 	"encoding/json"
-	"github.com/djpken/okex"
-	requests "github.com/djpken/okex/requests/rest/public"
-	responses "github.com/djpken/okex/responses/public_data"
 	"net/http"
+
+	"github.com/djpken/go-okex"
+	requests "github.com/djpken/go-okex/requests/rest/public"
+	responses "github.com/djpken/go-okex/responses/public_data"
 )
 
 // PublicData

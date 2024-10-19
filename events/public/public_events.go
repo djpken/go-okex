@@ -1,9 +1,9 @@
 package public
 
 import (
-	"github.com/djpken/okex/events"
-	"github.com/djpken/okex/models/market"
-	"github.com/djpken/okex/models/publicdata"
+	"github.com/djpken/go-okex/events"
+	"github.com/djpken/go-okex/models/market"
+	"github.com/djpken/go-okex/models/publicdata"
 )
 
 type (

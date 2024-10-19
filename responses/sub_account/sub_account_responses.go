@@ -1,9 +1,9 @@
 package sub_account
 
 import (
-	"github.com/djpken/okex/models/account"
-	models "github.com/djpken/okex/models/subaccount"
-	"github.com/djpken/okex/responses"
+	"github.com/djpken/go-okex/models/account"
+	models "github.com/djpken/go-okex/models/subaccount"
+	"github.com/djpken/go-okex/responses"
 )
 
 type (

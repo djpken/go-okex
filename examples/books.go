@@ -3,15 +3,16 @@ package main
 import (
 	"context"
 	"crypto/tls"
-	"github.com/djpken/okex"
-	"github.com/djpken/okex/api"
-	"github.com/djpken/okex/events/public"
-	requests "github.com/djpken/okex/requests/ws/public"
-	"github.com/gorilla/websocket"
 	"log"
 	"net/http"
 	_ "net/http/pprof"
 	"time"
+
+	"github.com/djpken/go-okex"
+	"github.com/djpken/go-okex/api"
+	"github.com/djpken/go-okex/events/public"
+	requests "github.com/djpken/go-okex/requests/ws/public"
+	"github.com/gorilla/websocket"
 )
 
 func main() {

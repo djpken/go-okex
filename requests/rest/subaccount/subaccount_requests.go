@@ -1,6 +1,6 @@
 package subaccount
 
-import "github.com/djpken/okex"
+import "github.com/djpken/go-okex"
 
 type (
 	ViewList struct {

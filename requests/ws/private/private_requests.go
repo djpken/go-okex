@@ -1,6 +1,6 @@
 package private
 
-import "github.com/djpken/okex"
+import "github.com/djpken/go-okex"
 
 type (
 	Account struct {

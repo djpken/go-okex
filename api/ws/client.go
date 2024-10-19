@@ -7,13 +7,14 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	"github.com/djpken/okex"
-	"github.com/djpken/okex/events"
-	"github.com/gorilla/websocket"
 	"io"
 	"net/http"
 	"sync"
 	"time"
+
+	"github.com/djpken/go-okex"
+	"github.com/djpken/go-okex/events"
+	"github.com/gorilla/websocket"
 )
 
 // ClientWs is the websocket api client

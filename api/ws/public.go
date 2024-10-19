@@ -3,11 +3,12 @@ package ws
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/djpken/okex"
-	"github.com/djpken/okex/events"
-	"github.com/djpken/okex/events/public"
-	requests "github.com/djpken/okex/requests/ws/public"
 	"strings"
+
+	"github.com/djpken/go-okex"
+	"github.com/djpken/go-okex/events"
+	"github.com/djpken/go-okex/events/public"
+	requests "github.com/djpken/go-okex/requests/ws/public"
 )
 
 // Public

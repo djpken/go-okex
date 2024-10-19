@@ -1,8 +1,8 @@
 package market
 
 import (
-	"github.com/djpken/okex/models/market"
-	"github.com/djpken/okex/responses"
+	"github.com/djpken/go-okex/models/market"
+	"github.com/djpken/go-okex/responses"
 )
 
 type (

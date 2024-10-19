@@ -1,8 +1,8 @@
 package funding
 
 import (
-	models "github.com/djpken/okex/models/funding"
-	"github.com/djpken/okex/responses"
+	models "github.com/djpken/go-okex/models/funding"
+	"github.com/djpken/go-okex/responses"
 )
 
 type (

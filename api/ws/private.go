@@ -2,10 +2,11 @@ package ws
 
 import (
 	"encoding/json"
-	"github.com/djpken/okex"
-	"github.com/djpken/okex/events"
-	"github.com/djpken/okex/events/private"
-	requests "github.com/djpken/okex/requests/ws/private"
+
+	"github.com/djpken/go-okex"
+	"github.com/djpken/go-okex/events"
+	"github.com/djpken/go-okex/events/private"
+	requests "github.com/djpken/go-okex/requests/ws/private"
 )
 
 // Private

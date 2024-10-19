@@ -2,9 +2,10 @@ package api
 
 import (
 	"context"
-	"github.com/djpken/okex"
-	"github.com/djpken/okex/api/rest"
-	"github.com/djpken/okex/api/ws"
+
+	"github.com/djpken/go-okex"
+	"github.com/djpken/go-okex/api/rest"
+	"github.com/djpken/go-okex/api/ws"
 )
 
 // Client is the main api wrapper of okex

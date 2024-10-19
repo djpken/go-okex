@@ -1,8 +1,8 @@
 package account
 
 import (
-	models "github.com/djpken/okex/models/account"
-	"github.com/djpken/okex/responses"
+	models "github.com/djpken/go-okex/models/account"
+	"github.com/djpken/go-okex/responses"
 )
 
 type (

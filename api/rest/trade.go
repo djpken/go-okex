@@ -2,10 +2,11 @@ package rest
 
 import (
 	"encoding/json"
-	"github.com/djpken/okex"
-	requests "github.com/djpken/okex/requests/rest/trade"
-	responses "github.com/djpken/okex/responses/trade"
 	"net/http"
+
+	"github.com/djpken/go-okex"
+	requests "github.com/djpken/go-okex/requests/rest/trade"
+	responses "github.com/djpken/go-okex/responses/trade"
 )
 
 // Trade

@@ -7,12 +7,13 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	"github.com/djpken/okex"
-	requests "github.com/djpken/okex/requests/rest/public"
-	responses "github.com/djpken/okex/responses/public_data"
 	"net/http"
 	"strings"
 	"time"
+
+	"github.com/djpken/go-okex"
+	requests "github.com/djpken/go-okex/requests/rest/public"
+	responses "github.com/djpken/go-okex/responses/public_data"
 )
 
 // ClientRest is the rest api client

@@ -1,8 +1,8 @@
 package public_data
 
 import (
-	"github.com/djpken/okex/models/publicdata"
-	"github.com/djpken/okex/responses"
+	"github.com/djpken/go-okex/models/publicdata"
+	"github.com/djpken/go-okex/responses"
 )
 
 type (

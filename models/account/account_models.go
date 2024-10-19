@@ -1,7 +1,7 @@
 package account
 
 import (
-	"github.com/djpken/okex"
+	"github.com/djpken/go-okex"
 )
 
 type (

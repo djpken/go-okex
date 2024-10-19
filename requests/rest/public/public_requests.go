@@ -1,6 +1,6 @@
 package public
 
-import "github.com/djpken/okex"
+import "github.com/djpken/go-okex"
 
 type (
 	GetInstruments struct {

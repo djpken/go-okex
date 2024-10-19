@@ -1,8 +1,8 @@
 package trade_data
 
 import (
-	"github.com/djpken/okex/models/tradedata"
-	"github.com/djpken/okex/responses"
+	"github.com/djpken/go-okex/models/tradedata"
+	"github.com/djpken/go-okex/responses"
 )
 
 type (

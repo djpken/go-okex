@@ -3,9 +3,10 @@ package market
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/djpken/okex"
 	"strconv"
 	"time"
+
+	"github.com/djpken/go-okex"
 )
 
 type (

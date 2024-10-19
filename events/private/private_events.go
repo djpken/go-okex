@@ -1,9 +1,9 @@
 package private
 
 import (
-	"github.com/djpken/okex/events"
-	"github.com/djpken/okex/models/account"
-	"github.com/djpken/okex/models/trade"
+	"github.com/djpken/go-okex/events"
+	"github.com/djpken/go-okex/models/account"
+	"github.com/djpken/go-okex/models/trade"
 )
 
 type (
