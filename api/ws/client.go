@@ -27,7 +27,7 @@ type ClientWs struct {
 	RawEventChan        chan *events.Basic
 	ErrChan             chan *events.Error
 	SubscribeChan       chan *events.Subscribe
-	UnsubscribeCh       chan *events.Unsubscribe
+	UnsubscribeChan     chan *events.Unsubscribe
 	LoginChan           chan *events.Login
 	SuccessChan         chan *events.Success
 	sendChan            map[bool]chan []byte
@@ -206,7 +206,7 @@ func (c *ClientWs) Send(p bool, op okex.Operation, args []map[string]string, ext
 func (c *ClientWs) SetChannels(errCh chan *events.Error, subCh chan *events.Subscribe, unSub chan *events.Unsubscribe, lCh chan *events.Login, sCh chan *events.Success) {
 	c.ErrChan = errCh
 	c.SubscribeChan = subCh
-	c.UnsubscribeCh = unSub
+	c.UnsubscribeChan = unSub
 	c.LoginChan = lCh
 	c.SuccessChan = sCh
 }
@@ -394,8 +394,8 @@ func (c *ClientWs) process(data []byte, e *events.Basic) bool {
 	case "unsubscribe":
 		e := events.Unsubscribe{}
 		_ = json.Unmarshal(data, &e)
-		if c.UnsubscribeCh != nil {
-			c.UnsubscribeCh <- &e
+		if c.UnsubscribeChan != nil {
+			c.UnsubscribeChan <- &e
 		}
 		if c.StructuredEventChan != nil {
 			c.StructuredEventChan <- e
