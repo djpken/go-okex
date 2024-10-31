@@ -74,6 +74,7 @@ const (
 	DemoPublicWsURL  = BaseURL("wss://wspap.okx.com:8443/ws/v5/public?brokerId=9999")
 	DemoPrivateWsURL = BaseURL("wss://wspap.okx.com:8443/ws/v5/private?brokerId=9999")
 
+	AnyInstrument     = InstrumentType("ANY")
 	SpotInstrument    = InstrumentType("SPOT")
 	MarginInstrument  = InstrumentType("MARGIN")
 	SwapInstrument    = InstrumentType("SWAP")
