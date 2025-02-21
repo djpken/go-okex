@@ -41,6 +41,7 @@ type (
 		Ccy     string            `json:"ccy,omitempty"`
 		PosSide okex.PositionSide `json:"posSide,omitempty"`
 		MgnMode okex.MarginMode   `json:"mgnMode"`
+		Tag     string            `json:"tag,omitempty"`
 	}
 	OrderDetails struct {
 		InstID  string `json:"instId"`
@@ -114,5 +115,18 @@ type (
 		Limit    float64             `json:"limit,omitempty,string"`
 		OrdType  okex.AlgoOrderType  `json:"ordType,omitempty"`
 		State    okex.OrderState     `json:"state,omitempty"`
+	}
+	OrderPreCheck struct {
+		ID         string            `json:"-"`
+		InstID     string            `json:"instId"`
+		Tag        string            `json:"tag,omitempty"`
+		ReduceOnly bool              `json:"reduceOnly,omitempty"`
+		Sz         float64           `json:"sz,string"`
+		Px         float64           `json:"px,omitempty,string"`
+		TdMode     okex.TradeMode    `json:"tdMode"`
+		Side       okex.OrderSide    `json:"side"`
+		PosSide    okex.PositionSide `json:"posSide,omitempty"`
+		OrdType    okex.OrderType    `json:"ordType"`
+		TgtCcy     okex.QuantityType `json:"tgtCcy,omitempty"`
 	}
 )

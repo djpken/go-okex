@@ -28,6 +28,7 @@ type (
 	ClosePosition struct {
 		InstID  string            `json:"instId"`
 		PosSide okex.PositionSide `json:"posSide"`
+		Tag     string            `json:"tag"`
 	}
 	Order struct {
 		InstID      string              `json:"instId"`
@@ -135,5 +136,8 @@ type (
 		TgtCcy       okex.QuantityType   `json:"tgtCcy"`
 		CTime        okex.JSONTime       `json:"cTime"`
 		TriggerTime  okex.JSONTime       `json:"triggerTime"`
+	}
+	OrderPreCheck struct {
+		//TODO
 	}
 )

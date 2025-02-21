@@ -42,4 +42,8 @@ type (
 		responses.Basic
 		AlgoOrders []*trade.AlgoOrder `json:"data"`
 	}
+	OrderPreCheck struct {
+		responses.Basic
+		OrderPreChecks []*trade.OrderPreCheck `json:"data"`
+	}
 )

@@ -301,3 +301,16 @@ func (c *Trade) GetAlgoOrderList(req requests.AlgoOrderList, arch bool) (respons
 
 	return
 }
+func (c *Trade) OrderPreCheck(req requests.OrderPreCheck) (response responses.OrderPreCheck, err error) {
+	p := "/api/v5/trade/order-precheck"
+	m := okex.S2M(req)
+	res, err := c.client.Do(http.MethodPost, p, true, m)
+	if err != nil {
+		return
+	}
+	defer res.Body.Close()
+	d := json.NewDecoder(res.Body)
+	err = d.Decode(&response)
+
+	return
+}
