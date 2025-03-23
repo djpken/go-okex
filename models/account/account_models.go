@@ -204,4 +204,7 @@ type (
 		Ccy   string           `json:"ccy"`
 		MaxWd okex.JSONFloat64 `json:"maxWd"`
 	}
+	AccountLevel struct {
+		AcctLv string `json:"acctLv"`
+	}
 )

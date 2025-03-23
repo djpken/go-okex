@@ -354,3 +354,20 @@ func (c *Account) GetMaxWithdrawals(req requests.GetBalance) (response responses
 
 	return
 }
+
+// SetAccountLevel
+//
+// https://www.okx.com/docs-v5/zh/#trading-account-rest-api-set-account-mode
+func (c *Account) SetAccountLevel(req requests.SetAccountLevel) (response responses.SetAccountLevel, err error) {
+	p := "/api/v5/account/set-account-level"
+	m := okex.S2M(req)
+	res, err := c.client.Do(http.MethodGet, p, true, m)
+	if err != nil {
+		return
+	}
+	defer res.Body.Close()
+	d := json.NewDecoder(res.Body)
+	err = d.Decode(&response)
+
+	return
+}

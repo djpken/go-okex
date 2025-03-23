@@ -79,4 +79,7 @@ type (
 	SetGreeks struct {
 		GreeksType okex.GreekType `json:"greeksType"`
 	}
+	SetAccountLevel struct {
+		AcctLv string `json:"acctLv"`
+	}
 )

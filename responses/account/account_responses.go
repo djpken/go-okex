@@ -70,4 +70,8 @@ type (
 		responses.Basic
 		MaxWithdrawals []*models.MaxWithdrawal `json:"data"`
 	}
+	SetAccountLevel struct {
+		responses.Basic
+		AccountLevels []*models.AccountLevel `json:"data"`
+	}
 )
