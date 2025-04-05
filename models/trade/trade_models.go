@@ -71,7 +71,7 @@ type (
 		TradeID  string              `json:"tradeId"`
 		ClOrdID  string              `json:"clOrdId"`
 		BillID   string              `json:"billId"`
-		Tag      okex.JSONFloat64    `json:"tag"`
+		Tag      string              `json:"tag"`
 		FillPx   okex.JSONFloat64    `json:"fillPx"`
 		FillSz   okex.JSONFloat64    `json:"fillSz"`
 		FeeCcy   okex.JSONFloat64    `json:"feeCcy"`
