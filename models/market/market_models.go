@@ -65,11 +65,12 @@ type (
 		TS     okex.JSONTime
 	}
 	IndexCandle struct {
-		O  float64
-		H  float64
-		L  float64
-		C  float64
-		TS okex.JSONTime
+		O       float64
+		H       float64
+		L       float64
+		C       float64
+		TS      okex.JSONTime
+		Confirm bool
 	}
 	Trade struct {
 		InstID  string           `json:"instId"`
@@ -189,10 +190,10 @@ func (c *Candle) UnmarshalJSON(buf []byte) error {
 
 func (c *IndexCandle) UnmarshalJSON(buf []byte) error {
 	var (
-		o, h, l, cl, ts string
-		err             error
+		o, h, l, cl, ts, confirm string
+		err                      error
 	)
-	tmp := []interface{}{&ts, &o, &h, &l, &cl}
+	tmp := []interface{}{&ts, &o, &h, &l, &cl, &confirm}
 	wantLen := len(tmp)
 	if err := json.Unmarshal(buf, &tmp); err != nil {
 		return err
@@ -224,6 +225,10 @@ func (c *IndexCandle) UnmarshalJSON(buf []byte) error {
 	}
 
 	c.C, err = strconv.ParseFloat(cl, 64)
+	if err != nil {
+		return err
+	}
+	c.Confirm, err = strconv.ParseBool(confirm)
 	if err != nil {
 		return err
 	}
