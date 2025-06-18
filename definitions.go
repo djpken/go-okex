@@ -166,23 +166,30 @@ const (
 	GreekInCoin    = GreekType("PA")
 	GreekInDollars = GreekType("PB")
 
-	Bar1m  = BarSize("1m")
-	Bar3m  = BarSize("3m")
-	Bar5m  = BarSize("5m")
-	Bar15m = BarSize("15m")
-	Bar30m = BarSize("30m")
-	Bar1H  = BarSize("1H")
-	Bar2H  = BarSize("2H")
-	Bar4H  = BarSize("4H")
-	Bar6H  = BarSize("6H")
-	Bar8H  = BarSize("8H")
-	Bar12H = BarSize("12H")
-	Bar1D  = BarSize("1D")
-	Bar1W  = BarSize("1W")
-	Bar1M  = BarSize("1M")
-	Bar3M  = BarSize("3M")
-	Bar6M  = BarSize("6M")
-	Bar1Y  = BarSize("1Y")
+	Bar1m     = BarSize("1m")
+	Bar3m     = BarSize("3m")
+	Bar5m     = BarSize("5m")
+	Bar15m    = BarSize("15m")
+	Bar30m    = BarSize("30m")
+	Bar1H     = BarSize("1H")
+	Bar2H     = BarSize("2H")
+	Bar4H     = BarSize("4H")
+	Bar6H     = BarSize("6H")
+	Bar12H    = BarSize("12H")
+	Bar1D     = BarSize("1D")
+	Bar2D     = BarSize("2D")
+	Bar3D     = BarSize("3D")
+	Bar1W     = BarSize("1W")
+	Bar1M     = BarSize("1M")
+	Bar3M     = BarSize("3M")
+	Bar6Hutc  = BarSize("6Hutc")
+	Bar12Hutc = BarSize("12Hutc")
+	Bar1Dutc  = BarSize("1Dutc")
+	Bar2Dutc  = BarSize("2Dutc")
+	Bar3Dutc  = BarSize("3Dutc")
+	Bar1Wutc  = BarSize("1Wutc")
+	Bar1Mutc  = BarSize("1Mutc")
+	Bar3Mutc  = BarSize("3Mutc")
 
 	TradeBuySide  = TradeSide("buy")
 	TradeSellSide = TradeSide("sell")
@@ -436,24 +443,18 @@ func (t BarSize) Duration() time.Duration {
 		return time.Hour * 2
 	case Bar4H:
 		return time.Hour * 4
-	case Bar6H:
+	case Bar6H, Bar6Hutc:
 		return time.Hour * 6
-	case Bar8H:
-		return time.Hour * 8
-	case Bar12H:
+	case Bar12H, Bar12Hutc:
 		return time.Hour * 12
-	case Bar1D:
+	case Bar1D, Bar1Dutc:
 		return time.Hour * 24
-	case Bar1W:
+	case Bar1W, Bar1Wutc:
 		return time.Hour * 24 * 7
-	case Bar1M:
+	case Bar1M, Bar1Mutc:
 		return time.Hour * 24 * 30
-	case Bar3M:
+	case Bar3M, Bar3Mutc:
 		return time.Hour * 24 * 30 * 3
-	case Bar6M:
-		return time.Hour * 20 * 30 * 6
-	case Bar1Y:
-		return time.Hour * 24 * 365
 	}
 
 	return time.Minute
