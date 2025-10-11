@@ -25,6 +25,22 @@ type RetryConfig struct {
 	Multiplier      float64       // Backoff multiplier
 }
 
+// SystemMessage represents system-level messages from the WebSocket client
+type SystemMessage struct {
+	Type      string    // Message type: "connection", "reconnection", "subscription"
+	Message   string    // Human-readable message
+	Private   bool      // Whether this is for private or public connection
+	Timestamp time.Time // When the message was generated
+}
+
+// SystemError represents system-level errors from the WebSocket client
+type SystemError struct {
+	Type      string    // Error type: "connection", "sender", "receiver", "subscription"
+	Error     error     // The actual error
+	Private   bool      // Whether this is for private or public connection
+	Timestamp time.Time // When the error occurred
+}
+
 // DefaultRetryConfig provides sensible defaults for retry behavior
 var DefaultRetryConfig = RetryConfig{
 	MaxRetries:      0, // Unlimited retries
@@ -52,6 +68,8 @@ type ClientWs struct {
 	UnsubscribeChan     chan *events.Unsubscribe
 	LoginChan           chan *events.Login
 	SuccessChan         chan *events.Success
+	SystemMsgChan       chan *SystemMessage
+	SystemErrChan       chan *SystemError
 	sendChan            map[bool]chan []byte
 	url                 map[bool]okex.BaseURL
 	conn                map[bool]*websocket.Conn
@@ -315,6 +333,54 @@ func (c *ClientWs) SetRetryConfig(config RetryConfig) {
 	c.retryConfig = config
 }
 
+// SetSystemChannels sets channels for receiving system messages and errors
+func (c *ClientWs) SetSystemChannels(msgCh chan *SystemMessage, errCh chan *SystemError) {
+	c.SystemMsgChan = msgCh
+	c.SystemErrChan = errCh
+}
+
+// sendSystemMessage sends a system message to the SystemMsgChan if it's set (non-blocking)
+func (c *ClientWs) sendSystemMessage(msgType, message string, private bool) {
+	if c.SystemMsgChan != nil {
+		msg := &SystemMessage{
+			Type:      msgType,
+			Message:   message,
+			Private:   private,
+			Timestamp: time.Now(),
+		}
+		select {
+		case c.SystemMsgChan <- msg:
+		default:
+			// Channel is full or no receiver, print to console as fallback
+			fmt.Printf("[%s] %s (private=%v)\n", msgType, message, private)
+		}
+	} else {
+		// No channel set, print to console
+		fmt.Printf("[%s] %s (private=%v)\n", msgType, message, private)
+	}
+}
+
+// sendSystemError sends a system error to the SystemErrChan if it's set (non-blocking)
+func (c *ClientWs) sendSystemError(errType string, err error, private bool) {
+	if c.SystemErrChan != nil {
+		sysErr := &SystemError{
+			Type:      errType,
+			Error:     err,
+			Private:   private,
+			Timestamp: time.Now(),
+		}
+		select {
+		case c.SystemErrChan <- sysErr:
+		default:
+			// Channel is full or no receiver, print to console as fallback
+			fmt.Printf("[%s ERROR] %v (private=%v)\n", errType, err, private)
+		}
+	} else {
+		// No channel set, print to console
+		fmt.Printf("[%s ERROR] %v (private=%v)\n", errType, err, private)
+	}
+}
+
 func (c *ClientWs) SetEventChannels(structuredEventCh chan interface{}, rawEventCh chan *events.Basic) {
 	c.StructuredEventChan = structuredEventCh
 	c.RawEventChan = rawEventCh
@@ -360,20 +426,20 @@ func (c *ClientWs) dial(p bool) error {
 	defer func(Body io.ReadCloser) {
 		err := Body.Close()
 		if err != nil {
-			fmt.Printf("error closing body: %v\n", err)
+			c.sendSystemError("connection", fmt.Errorf("error closing body: %w", err), p)
 		}
 	}(res.Body)
 	go func() {
 		err := c.receiver(p)
 		if err != nil {
-			fmt.Printf("receiver error: %v\n", err)
+			c.sendSystemError("receiver", err, p)
 			c.reconnect(p)
 		}
 	}()
 	go func() {
 		err := c.sender(p)
 		if err != nil {
-			fmt.Printf("sender error: %v\n", err)
+			c.sendSystemError("sender", err, p)
 			c.reconnect(p)
 		}
 	}()
@@ -427,7 +493,7 @@ func (c *ClientWs) reconnect(p bool) {
 	}
 
 	// Attempt to reconnect
-	fmt.Printf("attempting to reconnect (private=%v)...\n", p)
+	c.sendSystemMessage("reconnection", "attempting to reconnect...", p)
 	err := c.Connect(p)
 
 	c.reconnectMu[p].Lock()
@@ -435,11 +501,11 @@ func (c *ClientWs) reconnect(p bool) {
 	c.reconnectMu[p].Unlock()
 
 	if err != nil {
-		fmt.Printf("reconnection failed (private=%v): %v\n", p, err)
+		c.sendSystemError("reconnection", fmt.Errorf("reconnection failed: %w", err), p)
 		return
 	}
 
-	fmt.Printf("successfully reconnected (private=%v)\n", p)
+	c.sendSystemMessage("reconnection", "successfully reconnected", p)
 
 	// Wait a bit for new sender goroutine to be ready
 	time.Sleep(100 * time.Millisecond)
@@ -459,7 +525,7 @@ func (c *ClientWs) resubscribe(p bool) {
 		return
 	}
 
-	fmt.Printf("re-subscribing to %d subscription(s) (private=%v)...\n", len(subs), p)
+	c.sendSystemMessage("subscription", fmt.Sprintf("re-subscribing to %d subscription(s)...", len(subs)), p)
 
 	// Clear subscriptions before re-subscribing to avoid duplication
 	c.subscriptionsMu[p].Lock()
@@ -470,11 +536,11 @@ func (c *ClientWs) resubscribe(p bool) {
 	for _, sub := range subs {
 		err := c.Subscribe(p, sub.channels, sub.args...)
 		if err != nil {
-			fmt.Printf("failed to re-subscribe (private=%v): %v\n", p, err)
+			c.sendSystemError("subscription", fmt.Errorf("failed to re-subscribe: %w", err), p)
 		}
 	}
 
-	fmt.Printf("re-subscription complete (private=%v)\n", p)
+	c.sendSystemMessage("subscription", "re-subscription complete", p)
 }
 
 func (c *ClientWs) sender(p bool) error {
