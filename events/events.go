@@ -8,14 +8,17 @@ import (
 
 type (
 	Basic struct {
-		ID    string         `json:"id,omitempty"`
-		Event string         `json:"event"`
-		Code  int            `json:"code,omitempty,string"`
-		Msg   string         `json:"msg,omitempty"`
-		Op    okex.Operation `json:"op,omitempty"`
-		Arg   *Argument      `json:"arg,omitempty"`
-		Args  []*Argument    `json:"args,omitempty"`
-		Data  []*Argument    `json:"data,omitempty"`
+		ID        string         `json:"id,omitempty"`
+		Event     string         `json:"event"`
+		Code      int            `json:"code,omitempty,string"`
+		Msg       string         `json:"msg,omitempty"`
+		Op        okex.Operation `json:"op,omitempty"`
+		Arg       *Argument      `json:"arg,omitempty"`
+		Args      []*Argument    `json:"args,omitempty"`
+		Data      []*Argument    `json:"data,omitempty"`
+		EventType okex.EventType `json:"eventType,omitempty"`
+		CurPage   int            `json:"curPage,omitempty"`
+		LastPage  bool           `json:"lastPage,omitempty"`
 	}
 	Argument struct {
 		arg        map[string]interface{}
